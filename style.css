@@ -154,3 +154,9 @@ body {
   background-color: #0056b3;
   transform: scale(1.05);
 }
+
+.slider {
+  width: 120px;
+  margin-top: 6px;
+  accent-color: #649bd6;
+}
