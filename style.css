@@ -2,46 +2,45 @@ html, body {
   height: 94%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* جلوگیری از اسکرول کل صفحه */
-  touch-action: manipulation; /* جلوگیری از gestureهای ناخواسته */
-
+  overflow: hidden;
+  touch-action: manipulation;
 }
 
 body {
   font-family: 'Vazir', 'Shabnam', sans-serif;
   background-color: #f0f8ff;
   text-align: center;
-  font-size: 20px; /* افزایش پایه فونت */
+  font-size: 15px; /* کاهش پایه فونت */
 }
 
 .container {
   height: 100%;
   overflow-y: auto;
   margin: 0 auto;
-  padding: 24px;
+  padding: 18px;
   width: 90%;
   max-width: 500px;
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
 
 .problem {
-  font-size: 28px;
-  margin-bottom: 24px;
+  font-size: 21px;
+  margin-bottom: 18px;
   direction: ltr;
   text-align: left;
 }
 
 .digit {
   direction: rtl;
-  font-size: 24px;
-  padding: 7px 12px;
-  border-radius: 6px;
+  font-size: 18px;
+  padding: 5px 9px;
+  border-radius: 5px;
   margin: 0;
-  min-width: 36px;
+  min-width: 27px;
   display: inline-block;
   box-sizing: border-box;
 }
@@ -55,9 +54,9 @@ body {
 }
 
 .answer {
-  width: 60px;
-  height: 48px;
-  font-size: 28px;
+  width: 45px;
+  height: 36px;
+  font-size: 21px;
   text-align: center;
   margin: 0;
   border: 2px solid #ccc;
@@ -65,7 +64,7 @@ body {
   color: #333;
   background-color: #e6f7ff;
   transition: border-color 0.3s ease;
-  padding: 7px 12px;
+  padding: 5px 9px;
   box-sizing: border-box;
 }
 
@@ -84,15 +83,15 @@ body {
 
 .carry-box {
   display: inline-block;
-  width: 36px;
-  height: 48px;
-  font-size: 21px;
+  width: 27px;
+  height: 36px;
+  font-size: 16px;
   text-align: center;
-  padding: 6px 12px;
+  padding: 5px 9px;
   border: 2px solid #aaa;
-  border-radius: 6px;
+  border-radius: 5px;
   background-color: #fffbe6;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   vertical-align: middle;
   box-sizing: border-box;
   font-family: 'Vazir', 'Shabnam', sans-serif;
@@ -102,31 +101,31 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
   border: 2px solid #ccc;
   border-radius: 8px;
-  padding: 6px 10px;
+  padding: 5px 8px;
   background-color: #fff;
-  margin: 0 10px;
+  margin: 0 8px;
   font-weight: bold;
 }
 
 .buttons button {
-  margin: 12px;
-  padding: 12px 24px;
-  font-size: 19px;
-  border-radius: 8px;
+  margin: 9px;
+  padding: 9px 18px;
+  font-size: 14px;
+  border-radius: 7px;
   cursor: pointer;
 }
 
 #hint-section {
-  margin-top: 24px;
-  font-size: 21px;
+  margin-top: 18px;
+  font-size: 16px;
   color: #333;
 }
 
 #feedback {
-  margin-top: 18px;
+  margin-top: 14px;
   font-weight: bold;
   color: #d9534f;
 }
@@ -138,16 +137,16 @@ body {
 
 #final-actions button {
   font-family: 'Vazir', 'Shabnam', sans-serif;
-  font-size: 20px;
-  padding: 14px 28px;
-  margin: 10px;
+  font-size: 15px;
+  padding: 10px 21px;
+  margin: 8px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: #649bd6;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
