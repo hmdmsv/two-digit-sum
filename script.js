@@ -165,6 +165,7 @@ function createSecondStage(data) {
   `;
 
   hintSection.appendChild(stageDiv);
+  hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
   document.getElementById("sum2-units").focus();
   autoTab("sum2-units", "carry-input");
   enforcePersianInput("sum2-units");
@@ -249,6 +250,7 @@ function createThirdStage(data, carry) {
   `;
 
   hintSection.appendChild(stageDiv);
+  hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
   document.getElementById("sum3-tens").focus();
   autoTab("sum3-tens", "check3-btn");
   enforcePersianInput("sum3-tens");
@@ -327,6 +329,7 @@ function createFinalStage(data) {
   `;
 
   hintSection.appendChild(stageDiv);
+  hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
   document.getElementById("final-tens").focus();
   autoTab("final-tens", "final-units");
   enforcePersianInput("final-tens");
