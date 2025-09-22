@@ -203,8 +203,7 @@ function createSecondStage(data) {
     checkBtn.disabled = false;
     document.getElementById("hint2-btn").disabled = true;
     document.getElementById("check2-btn").disabled = true;
-    carryInput.disabled = true;
-      unitsInput.disabled = true;
+    
 
     createThirdStage(data, correctCarry);
   });
