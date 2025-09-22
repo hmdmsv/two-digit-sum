@@ -270,6 +270,8 @@ function createThirdStage(data, carry) {
     checkBtn.disabled = false;
     document.getElementById("hint3-btn").disabled = true;
     document.getElementById("check3-btn").disabled = true;
+    tensInput.disabled = true;
+
     createFinalStage(data);
     
   });
