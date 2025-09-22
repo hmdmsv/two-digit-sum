@@ -3,6 +3,8 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden; /* جلوگیری از اسکرول کل صفحه */
+  touch-action: manipulation; /* جلوگیری از gestureهای ناخواسته */
+
 }
 
 body {
