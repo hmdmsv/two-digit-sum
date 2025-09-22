@@ -146,11 +146,11 @@ function createSecondStage(data) {
     <span>=</span>
 
 <div style="display: inline-block; text-align: center;">
-  <div style="margin-bottom: 5px;">
+    <div style="display: inline-block; text-align: center; margin-top: 10px;">
     <label for="carry-input" style="font-size: 14px;">انتقال</label><br>
     <input type="text" maxlength="1" class="carry-box" id="carry-input">
   </div>
-  <div>
+  <div style="display: inline-block; text-align: center; margin-top: 10px;">
     <label for="sum2-units" style="font-size: 16px;">یکان</label><br>
     <input type="text" maxlength="1" class="answer units-input" id="sum2-units">
   </div>
