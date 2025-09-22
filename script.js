@@ -1,3 +1,34 @@
+function toPersianDigits(str) {
+  const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  return str.toString().replace(/\d/g, d => persianDigits[d]);
+}
+
+
+
+function toEnglishDigits(str) {
+  const englishDigits = ['0','1','2','3','4','5','6','7','8','9'];
+  return str.replace(/[۰-۹]/g, d => englishDigits['۰۱۲۳۴۵۶۷۸۹'.indexOf(d)]);
+}
+
+function isValidPersianDigit(str) {
+  return /^[۰-۹]$/.test(str); // فقط یک رقم فارسی
+}
+
+
+function enforcePersianInput(inputId) {
+  const input = document.getElementById(inputId);
+  input.addEventListener("input", () => {
+    const raw = toEnglishDigits(input.value);
+    if (!/^\d?$/.test(raw)) {
+      input.value = ""; // حذف کاراکتر نامعتبر
+      return;
+    }
+    const cursorPos = input.selectionStart;
+    input.value = toPersianDigits(raw);
+    input.setSelectionRange(cursorPos, cursorPos);
+  });
+}
+
 function generateNumbers() {
   let num1, num2;
   do {
@@ -14,6 +45,8 @@ function generateNumbers() {
     num1Tens: Math.floor(num1 / 10),
     num2Tens: Math.floor(num2 / 10)
   };
+  console.log(toPersianDigits(data.num1Tens)); // ببین خروجی چی هست
+
 }
 
 function autoTab(currentInputId, nextInputId, maxLength = 1) {
@@ -21,7 +54,8 @@ function autoTab(currentInputId, nextInputId, maxLength = 1) {
   const next = document.getElementById(nextInputId);
 
   current.addEventListener("input", () => {
-    if (current.value.length >= maxLength) {
+    const englishValue = toEnglishDigits(current.value);
+    if (englishValue.length >= maxLength && /^\d+$/.test(englishValue)) {
       if (next.disabled) next.disabled = false;
       next.focus();
     }
@@ -36,13 +70,17 @@ function createFirstStage(data) {
   stageDiv.className = "problem";
 
   stageDiv.innerHTML = `
-    <span class="digit tens" id="num1-tens">${data.num1Tens}</span>
-    <span class="digit units" id="num1-units">${data.num1Units}</span>
+    <div class="number-block">
+    <span class="digit tens" id="num1-tens">${toPersianDigits(data.num1Tens)}</span>
+    <span class="digit units" id="num1-units">${toPersianDigits(data.num1Units)}</span>
+    </div>
     <span>+</span>
-    <span class="digit tens" id="num2-tens">${data.num2Tens}</span>
-    <span class="digit units" id="num2-units">${data.num2Units}</span>
+    <div class="number-block">
+    <span class="digit tens" id="num2-tens">${toPersianDigits(data.num2Tens)}</span>
+    <span class="digit units" id="num2-units">${toPersianDigits(data.num2Units)}</span>
+    </div>
     <span>=</span>
-
+    
     <input type="text" maxlength="1" class="answer tens-input" id="sum-tens" placeholder="دهگان">
     <input type="text" maxlength="1" class="answer units-input" id="sum-units" placeholder="یکان">
 
@@ -62,6 +100,7 @@ function createFirstStage(data) {
 
   function toggleButton() {
     checkBtn.disabled = !(tensInput.value && unitsInput.value);
+    if (!checkBtn.disabled) checkBtn.focus();
   }
 
   tensInput.addEventListener("input", toggleButton);
@@ -78,6 +117,8 @@ function createFirstStage(data) {
 
   tensInput.focus();
   autoTab("sum-tens", "sum-units");
+  enforcePersianInput("sum-tens");
+  enforcePersianInput("sum-units");
 }
 
 function disableFirstStage() {
@@ -95,9 +136,13 @@ function createSecondStage(data) {
   stageDiv.className = "problem";
 
   stageDiv.innerHTML = `
-    <span class="digit units">${data.num1Units}</span>
+  <div class="number-block">
+    <span class="digit units">${toPersianDigits(data.num1Units)}</span>
+    </div>
     <span>+</span>
-    <span class="digit units">${data.num2Units}</span>
+    <div class="number-block">
+    <span class="digit units">${toPersianDigits(data.num2Units)}</span>
+    </div>
     <span>=</span>
 
     <div style="display: inline-block; text-align: center;">
@@ -116,6 +161,8 @@ function createSecondStage(data) {
   hintSection.appendChild(stageDiv);
   document.getElementById("sum2-units").focus();
   autoTab("sum2-units", "carry-input");
+  enforcePersianInput("sum2-units");
+  enforcePersianInput("carry-input");
 
   const unitsInput = document.getElementById("sum2-units");
   const carryInput = document.getElementById("carry-input");
@@ -130,8 +177,8 @@ function createSecondStage(data) {
   carryInput.addEventListener("input", toggleCheckButton);
 
   checkBtn.addEventListener("click", () => {
-    const userUnits = parseInt(unitsInput.value);
-    const userCarry = parseInt(carryInput.value);
+    const userUnits = parseInt(toEnglishDigits(unitsInput.value));
+    const userCarry = parseInt(toEnglishDigits(carryInput.value));
     const correctUnits = (data.num1Units + data.num2Units) % 10;
     const correctCarry = (data.num1Units + data.num2Units) >= 10 ? 1 : 0;
 
@@ -151,9 +198,14 @@ function createSecondStage(data) {
     const correctUnits = (data.num1Units + data.num2Units) % 10;
     const correctCarry = (data.num1Units + data.num2Units) >= 10 ? 1 : 0;
 
-    unitsInput.value = correctUnits;
-    carryInput.value = correctCarry;
+    unitsInput.value = toPersianDigits(correctUnits);
+    carryInput.value = toPersianDigits(correctCarry);
     checkBtn.disabled = false;
+    document.getElementById("hint2-btn").disabled = true;
+    document.getElementById("check2-btn").disabled = true;
+    carryInput.disabled = true;
+      unitsInput.disabled = true;
+
     createThirdStage(data, correctCarry);
   });
 }
@@ -167,11 +219,15 @@ function createThirdStage(data, carry) {
   const sumTens = data.num1Tens + data.num2Tens + carry;
 
   stageDiv.innerHTML = `
-    <span class="digit tens">${data.num1Tens}</span>
+   <div class="number-block">
+    <span class="digit tens">${toPersianDigits(data.num1Tens)}</span>
+    </div>
     <span>+</span>
-    <span class="digit tens">${data.num2Tens}</span>
+    <div class="number-block">
+    <span class="digit tens">${toPersianDigits(data.num2Tens)}</span>
+    </div>
     <span>+</span>
-    <span class="digit carry">${carry}</span>
+    <span class="digit carry">${toPersianDigits(carry)}</span>
     <span>=</span>
 
     <input type="text" maxlength="2" class="answer tens-input" id="sum3-tens" placeholder="دهگان">
@@ -186,6 +242,8 @@ function createThirdStage(data, carry) {
   hintSection.appendChild(stageDiv);
   document.getElementById("sum3-tens").focus();
   autoTab("sum3-tens", "check3-btn");
+  enforcePersianInput("sum3-tens");
+
 
   const tensInput = document.getElementById("sum3-tens");
   const checkBtn = document.getElementById("check3-btn");
@@ -195,7 +253,7 @@ function createThirdStage(data, carry) {
   });
 
   checkBtn.addEventListener("click", () => {
-    const userTens = parseInt(tensInput.value);
+    const userTens = parseInt(toEnglishDigits(tensInput.value));
     const feedback = document.getElementById("feedback3");
 
     if (userTens === sumTens) {
@@ -209,7 +267,7 @@ function createThirdStage(data, carry) {
   });
 
   document.getElementById("hint3-btn").addEventListener("click", () => {
-    tensInput.value = sumTens;
+    tensInput.value = toPersianDigits(sumTens);
     checkBtn.disabled = false;
     createFinalStage(data);
   });
@@ -222,11 +280,15 @@ function createFinalStage(data) {
   stageDiv.className = "problem";
 
   stageDiv.innerHTML = `
-    <span class="digit tens">${data.num1Tens}</span>
-    <span class="digit units">${data.num1Units}</span>
+    <div class="number-block">
+    <span class="digit tens">${toPersianDigits(data.num1Tens)}</span>
+    <span class="digit units">${toPersianDigits(data.num1Units)}</span>
+    </div>
     <span>+</span>
-    <span class="digit tens">${data.num2Tens}</span>
-    <span class="digit units">${data.num2Units}</span>
+    <div class="number-block">
+    <span class="digit tens">${toPersianDigits(data.num2Tens)}</span>
+    <span class="digit units">${toPersianDigits(data.num2Units)}</span>
+    </div>
     <span>=</span>
 
     <input type="text" maxlength="1" class="answer tens-input" id="final-tens" placeholder="دهگان">
@@ -242,6 +304,8 @@ function createFinalStage(data) {
   hintSection.appendChild(stageDiv);
   document.getElementById("final-tens").focus();
   autoTab("final-tens", "final-units");
+  enforcePersianInput("final-tens");
+  enforcePersianInput("final-units");
 
   const tensInput = document.getElementById("final-tens");
   const unitsInput = document.getElementById("final-units");
@@ -249,14 +313,15 @@ function createFinalStage(data) {
 
   function toggleFinalCheck() {
     checkBtn.disabled = !(tensInput.value && unitsInput.value);
+    if (!checkBtn.disabled) checkBtn.focus();
   }
 
   tensInput.addEventListener("input", toggleFinalCheck);
   unitsInput.addEventListener("input", toggleFinalCheck);
 
   checkBtn.addEventListener("click", () => {
-    const userTens = parseInt(tensInput.value);
-    const userUnits = parseInt(unitsInput.value);
+    const userTens = parseInt(toEnglishDigits(tensInput.value));
+    const userUnits = parseInt(toEnglishDigits(unitsInput.value));
     const correctTens = data.tens;
     const correctUnits = data.units;
 
@@ -309,6 +374,7 @@ function resetStages(data) {
 
   function toggleButton() {
     newCheckBtn.disabled = !(tensInput.value && unitsInput.value);
+    if (!checkBtn.disabled) checkBtn.focus();
   }
 
   tensInput.addEventListener("input", toggleButton);
@@ -332,7 +398,7 @@ function checkAnswer(correctTens, correctUnits, data) {
   const unitsInput = document.getElementById("sum-units").value;
   const feedback = document.getElementById("feedback");
 
-  if (parseInt(tensInput) === correctTens && parseInt(unitsInput) === correctUnits) {
+  if (parseInt(toEnglishDigits(tensInput)) === correctTens && parseInt(toEnglishDigits(unitsInput)) === correctUnits) {
     feedback.textContent = "آفرین! جواب درست است 🎉";
     feedback.style.color = "green";
     disableFirstStage();

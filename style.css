@@ -1,5 +1,12 @@
+@font-face {
+    font-family: IranSans;
+    src: url('../fonts/IRANSansWeb(FaNum).eot');
+    src: url('../fonts/IRANSansWeb(FaNum).ttf') format('truetype')
+}
+
+
 body {
-  font-family: 'Vazir', sans-serif;
+  font-family: 'Vazir', 'Shabnam', 'IRANSans', sans-serif;
   background-color: #f0f8ff;
   text-align: center;
 }
@@ -20,9 +27,10 @@ body {
 }
 
 .digit {
-  padding: 5px 10px;
+  direction: rtl;
+  padding: 5px 8px;
   border-radius: 5px;
-  margin: 0 5px;
+  margin: 0; /* حذف فاصله داخلی */
 }
 
 .tens {
@@ -97,4 +105,22 @@ body {
   border-radius: 5px;
   background-color: #fffbe6;
   margin-bottom: 5px;
+}
+
+.number-block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px; /* فاصله خیلی کم بین دهگان و یکان */
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 8px;
+  background-color: #fff;
+  margin: 0 8px;
+  font-weight: bold;
+}
+
+.answer,
+.carry-box {
+  font-family: 'Vazir', 'Shabnam', 'IRANSans', sans-serif !important;
 }
