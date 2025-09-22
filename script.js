@@ -269,6 +269,8 @@ function createThirdStage(data, carry) {
     tensInput.value = toPersianDigits(sumTens);
     checkBtn.disabled = false;
     createFinalStage(data);
+    document.getElementById("hint3-btn").disabled = true;
+    document.getElementById("check3-btn").disabled = true;
   });
 }
 
