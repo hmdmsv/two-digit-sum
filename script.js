@@ -232,7 +232,7 @@ function createThirdStage(data, carry) {
     <span class="digit tens">${toPersianDigits(data.num2Tens)}</span>
     </div>
     <span>+</span>
-    <span class="carry-box" style="text-align: center ; justify-content: top">${toPersianDigits(carry)}</span>
+    <span class="carry-box">${toPersianDigits(carry)}</span>
     <span>=</span>
     <div style="display: inline-block; text-align: center;">
     <div style="display: inline-block; text-align: center; margin-top: 10px;">

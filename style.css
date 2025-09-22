@@ -106,7 +106,7 @@ body {
 .number-block {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content:center;
   gap: 2px; /* فاصله خیلی کم بین دهگان و یکان */
   border: 2px solid #ccc;
   border-radius: 8px;
@@ -117,7 +117,6 @@ body {
 }
 
 .digit,
-.carry-box,
 .answer {
   display: inline-block;
   font-size: 20px;
@@ -132,14 +131,15 @@ body {
 .carry-box {
   display: inline-block;
   font-size: 18px;
-  line-height: 25px;
-  height: 25px;
-  padding: 4px 6px;
+  font-family: 'Vazir', 'Shabnam', sans-serif;
+  height: 40px;
+  padding: 5px 10px;
   text-align: center;
+  justify-content: center;
   border: 2px solid #aaa;
   border-radius: 5px;
   background-color: #fffbe6;
-  vertical-align: middle;
+  vertical-align:middle;
   box-sizing: border-box;
   min-width: 30px;
 }
