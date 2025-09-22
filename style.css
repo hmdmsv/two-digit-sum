@@ -116,7 +116,30 @@ body {
   font-weight: bold;
 }
 
-.answer,
-.carry-box {
+.digit,
+.carry-box,
+.answer {
+  display: inline-block;
+  font-size: 20px;
+  padding: 6px 10px;
+  text-align: center;
+  border-radius: 6px;
   font-family: 'Vazir', 'Shabnam', sans-serif;
+  min-width: 30px;
+  box-sizing: border-box;
+}
+
+.carry-box {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 25px;
+  height: 25px;
+  padding: 4px 6px;
+  text-align: center;
+  border: 2px solid #aaa;
+  border-radius: 5px;
+  background-color: #fffbe6;
+  vertical-align: middle;
+  box-sizing: border-box;
+  min-width: 30px;
 }

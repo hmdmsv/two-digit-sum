@@ -81,8 +81,8 @@ function createFirstStage(data) {
     </div>
     <span>=</span>
     
-    <input type="text" maxlength="1" class="answer tens-input" id="sum-tens" placeholder="دهگان">
-    <input type="text" maxlength="1" class="answer units-input" id="sum-units" placeholder="یکان">
+    <input type="text" maxlength="1" class="answer tens-input" id="sum-tens">
+    <input type="text" maxlength="1" class="answer units-input" id="sum-units">
 
     <div class="buttons">
       <button id="check-btn" disabled>بررسی جواب</button>
@@ -145,11 +145,17 @@ function createSecondStage(data) {
     </div>
     <span>=</span>
 
-    <div style="display: inline-block; text-align: center;">
-      <input type="text" maxlength="1" class="carry-box" id="carry-input" placeholder="انتقال">
-      <br>
-      <input type="text" maxlength="1" class="answer units-input" id="sum2-units" placeholder="یکان">
-    </div>
+<div style="display: inline-block; text-align: center;">
+  <div style="margin-bottom: 5px;">
+    <label for="carry-input" style="font-size: 14px;">انتقال</label><br>
+    <input type="text" maxlength="1" class="carry-box" id="carry-input">
+  </div>
+  <div>
+    <label for="sum2-units" style="font-size: 16px;">یکان</label><br>
+    <input type="text" maxlength="1" class="answer units-input" id="sum2-units">
+  </div>
+</div>
+
 
     <div class="buttons">
       <button id="check2-btn" disabled>بررسی جواب</button>
@@ -226,10 +232,14 @@ function createThirdStage(data, carry) {
     <span class="digit tens">${toPersianDigits(data.num2Tens)}</span>
     </div>
     <span>+</span>
-    <span class="digit carry">${toPersianDigits(carry)}</span>
+    <span class="carry-box" style="text-align: center ; justify-content: top">${toPersianDigits(carry)}</span>
     <span>=</span>
-
-    <input type="text" maxlength="2" class="answer tens-input" id="sum3-tens" placeholder="دهگان">
+    <div style="display: inline-block; text-align: center;">
+    <div style="display: inline-block; text-align: center; margin-top: 10px;">
+  <label for="sum3-tens" style="font-size: 14px;">دهگان</label><br>
+  <input type="text" maxlength="2" class="answer tens-input" id="sum3-tens">
+  </div>
+    </div>
 
     <div class="buttons">
       <button id="check3-btn" disabled>بررسی جواب</button>
@@ -295,14 +305,25 @@ function createFinalStage(data) {
     </div>
     <span>=</span>
 
-    <input type="text" maxlength="1" class="answer tens-input" id="final-tens" placeholder="دهگان">
-    <input type="text" maxlength="1" class="answer units-input" id="final-units" placeholder="یکان">
+<!-- خط اصلی محاسبه: فقط کادرهای ورودی با label بالا -->
+<div style="display: inline-block; text-align: center;">
+    <div style="display: inline-block; text-align: center; margin-top: 10px;">
+    <label for="final-tens" style="font-size: 14px;">دهگان</label><br>
+    <input type="text" maxlength="1" class="answer tens-input" id="final-tens">
+  </div>
+<div style="display: inline-block; text-align: center; margin-top: 10px;">
+    <label for="final-tens" style="font-size: 14px;">یکان</label><br>
+    <input type="text" maxlength="1" class="answer units-input" id="final-units">
+  </div>
 
-    <div class="buttons">
-      <button id="final-check-btn" disabled>بررسی جواب</button>
-    </div>
-    <div id="final-feedback"></div>
-    <div id="final-actions" style="margin-top: 15px;"></div>
+</div>
+
+<!-- عناصر غیرمحاسباتی: جداگانه زیر خط اصلی -->
+<div class="buttons" style="margin-top: 12px;">
+  <button id="final-check-btn" disabled>بررسی جواب</button>
+</div>
+<div id="final-feedback" style="margin-top: 8px;"></div>
+<div id="final-actions" style="margin-top: 15px;"></div>
   `;
 
   hintSection.appendChild(stageDiv);
