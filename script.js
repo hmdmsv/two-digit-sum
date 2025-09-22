@@ -361,8 +361,8 @@ function createFinalStage(data) {
       feedback.style.color = "green";
 
       actions.innerHTML = `
-        <button id="repeat-btn">🔁 تکرار</button>
-        <button id="next-btn">➡️ بعدی</button>
+        <button class="final-actions" id="repeat-btn">🔁 تکرار</button>
+        <button class="final-actions" id="next-btn">➡️ بعدی</button>
       `;
 
       document.getElementById("repeat-btn").addEventListener("click", () => {
