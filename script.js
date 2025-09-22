@@ -330,8 +330,8 @@ function createFinalStage(data) {
 
   hintSection.appendChild(stageDiv);
   hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  document.getElementById("final-tens").focus();
-  autoTab("final-tens", "final-units");
+  document.getElementById("final-units").focus();
+  autoTab("final-units", "final-tens");
   enforcePersianInput("final-tens");
   enforcePersianInput("final-units");
 
