@@ -98,14 +98,19 @@ function createKeyboard() {
   keyboard.id = "custom-keyboard";
   keyboard.className = "keyboard-bar";
 
+  // ظرف داخلی برای دکمه‌ها
+  const keyContainer = document.createElement("div");
+  keyContainer.className = "key-container";
+
   for (let i = 0; i <= 9; i++) {
     const btn = document.createElement("button");
     btn.className = "key-btn";
     btn.textContent = toPersianDigits(i);
     btn.addEventListener("click", () => handleDigitClick(i));
-    keyboard.appendChild(btn);
+    keyContainer.appendChild(btn);
   }
 
+  keyboard.appendChild(keyContainer);
   document.body.appendChild(keyboard);
 }
 

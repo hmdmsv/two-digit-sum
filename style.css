@@ -20,7 +20,7 @@ body {
   margin: 0 auto;
   padding: 18px;
   width: 95%;
-  /* max-width: 500px; */
+  max-width: 500px;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
@@ -157,22 +157,34 @@ body {
 }
 
 
-.keyboard-bar { 
+.keyboard-bar {
   position: fixed;
-  margin: 20px 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: #f9f9f9;
   display: flex;
-  justify-content: space-around;
+  justify-content: center; /* وسط‌چین کردن دکمه‌ها */
+  flex-wrap: wrap;
   padding: 10px 0;
   border-top: 2px solid #ccc;
   z-index: 1000;
 }
 
+.key-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  max-width: 500px; /* هم‌عرض با .container */
+  width: 95%;
+  margin: 0 auto;
+}
+
 .key-btn {
-  font-family: 'Vazir', 'Shabnam', sans-serif; 
+  font-family: 'Vazir', 'Shabnam', sans-serif;
+  flex: 1;
+  min-width: 40px;
+  max-width: 50px;
   font-size: 24px;
   padding: 10px 14px;
   background-color: #e0e0e0;
@@ -180,7 +192,9 @@ body {
   border-radius: 6px;
   cursor: pointer;
   transition: 0.2s;
+  text-align: center;
 }
+
 
 .key-btn:active {
   background-color: #c0e7ff;
