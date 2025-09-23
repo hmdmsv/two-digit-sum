@@ -167,6 +167,9 @@ let selectedUnits = null;
 
 setupStageKeyboard("check-btn", "sum-tens", "sum-units");
 
+  container.scrollIntoView({ behavior: "smooth", block: "end" });
+
+
 document.getElementById("sum-tens").addEventListener("click", () => setActiveField("sum-tens"));
 document.getElementById("sum-units").addEventListener("click", () => setActiveField("sum-units"));
   
@@ -246,9 +249,7 @@ function createSecondStage(data) {
   hintSection.appendChild(stageDiv);
   setupStageKeyboard("check2-btn", "carry-input", "sum2-units");
 
-
-
-  hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  hintSection.scrollIntoView({ behavior: "smooth", block: "end" });
   document.getElementById("sum2-units").focus();
   autoTab("sum2-units", "carry-input");
   enforcePersianInput("sum2-units");
