@@ -45,7 +45,6 @@ function generateNumbers() {
     num1Tens: Math.floor(num1 / 10),
     num2Tens: Math.floor(num2 / 10)
   };
-  console.log(toPersianDigits(data.num1Tens)); // ببین خروجی چی هست
 
 }
 
@@ -61,6 +60,68 @@ function autoTab(currentInputId, nextInputId, maxLength = 1) {
     }
   });
 }
+
+let activeField = null;
+let checkBtnId = null;
+
+function handleDigitClick(val) {
+  const input = document.getElementById(activeField);
+  if (!input) return;
+
+  input.value = toPersianDigits(val);
+
+  const checkBtn = document.getElementById(checkBtnId);
+  const parent = input.closest(".problem");
+
+  // فقط ورودی‌هایی که readonly هستن (یعنی با کیبورد عددی پر می‌شن)
+  const stageInputs = parent.querySelectorAll("input[readonly]");
+  const allFilled = Array.from(stageInputs).every(inp => toEnglishDigits(inp.value).length > 0);
+
+  checkBtn.disabled = !allFilled;
+}
+
+function setActiveField(fieldId) {
+  activeField = fieldId;
+
+  const allInputs = document.querySelectorAll(".answer");
+  allInputs.forEach(input => input.classList.remove("active"));
+
+  const target = document.getElementById(fieldId);
+  if (target) target.classList.add("active");
+}
+
+function createKeyboard() {
+  const oldKeyboard = document.getElementById("custom-keyboard");
+  if (oldKeyboard) oldKeyboard.remove();
+
+  const keyboard = document.createElement("div");
+  keyboard.id = "custom-keyboard";
+  keyboard.className = "keyboard-bar";
+
+  for (let i = 0; i <= 9; i++) {
+    const btn = document.createElement("button");
+    btn.className = "key-btn";
+    btn.textContent = toPersianDigits(i);
+    btn.addEventListener("click", () => handleDigitClick(i));
+    keyboard.appendChild(btn);
+  }
+
+  document.body.appendChild(keyboard);
+}
+
+
+function setupStageKeyboard(stagePrefix, tensId, unitsId) {
+  activeField = unitsId;
+  checkBtnId = stagePrefix;
+
+  createKeyboard();
+
+  document.getElementById(unitsId).addEventListener("click", () => setActiveField(unitsId));
+  if (tensId) {
+    document.getElementById(tensId).addEventListener("click", () => setActiveField(tensId));
+  }
+}
+
 
 function createFirstStage(data) {
   const container = document.getElementById("main-container");
@@ -81,8 +142,8 @@ function createFirstStage(data) {
     </div>
     <span>=</span>
     
-    <input type="text" maxlength="1" class="answer tens-input" id="sum-tens">
-    <input type="text" maxlength="1" class="answer units-input" id="sum-units">
+    <input type="text" maxlength="1" class="answer tens-input" id="sum-tens" readonly>
+    <input type="text" maxlength="1" class="answer units-input" id="sum-units" readonly>
 
     <div class="buttons">
       <button id="check-btn" disabled>بررسی جواب</button>
@@ -91,8 +152,19 @@ function createFirstStage(data) {
     <div id="feedback"></div>
     <div id="hint-section"></div>
   `;
+  let selectedTens = null;
+let selectedUnits = null;
+
+
+
 
   container.appendChild(stageDiv);
+
+setupStageKeyboard("check-btn", "sum-tens", "sum-units");
+
+document.getElementById("sum-tens").addEventListener("click", () => setActiveField("sum-tens"));
+document.getElementById("sum-units").addEventListener("click", () => setActiveField("sum-units"));
+  
 
   const tensInput = document.getElementById("sum-tens");
   const unitsInput = document.getElementById("sum-units");
@@ -103,11 +175,13 @@ function createFirstStage(data) {
     if (!checkBtn.disabled) checkBtn.focus();
   }
 
-  tensInput.addEventListener("input", toggleButton);
-  unitsInput.addEventListener("input", toggleButton);
+ 
 
   checkBtn.addEventListener("click", () => {
-    checkAnswer(data.tens, data.units, data);
+    const tens = parseInt(toEnglishDigits(document.getElementById("sum-tens").value));
+  const units = parseInt(toEnglishDigits(document.getElementById("sum-units").value));
+  checkAnswer(data.tens, data.units, data);
+
   });
 
   document.getElementById("hint-btn").addEventListener("click", () => {
@@ -115,10 +189,10 @@ function createFirstStage(data) {
     createSecondStage(data);
   });
 
-  tensInput.focus();
-  autoTab("sum-tens", "sum-units");
-  enforcePersianInput("sum-tens");
-  enforcePersianInput("sum-units");
+  // tensInput.focus();
+  // autoTab("sum-tens", "sum-units");
+  // enforcePersianInput("sum-tens");
+  // enforcePersianInput("sum-units");
 }
 
 function disableFirstStage() {
@@ -148,11 +222,11 @@ function createSecondStage(data) {
 <div style="display: inline-block; text-align: center;">
     <div style="display: inline-block; text-align: center; margin-top: 10px;">
     <label for="carry-input" style="font-size: 14px;">انتقال</label><br>
-    <input type="text" maxlength="1" class="carry-box" id="carry-input">
+    <input type="text" maxlength="1" class="carry-box" id="carry-input" readonly>
   </div>
   <div style="display: inline-block; text-align: center; margin-top: 10px;">
     <label for="sum2-units" style="font-size: 16px;">یکان</label><br>
-    <input type="text" maxlength="1" class="answer units-input" id="sum2-units">
+    <input type="text" maxlength="1" class="answer units-input" id="sum2-units" readonly>
   </div>
 </div>
 
@@ -165,6 +239,10 @@ function createSecondStage(data) {
   `;
 
   hintSection.appendChild(stageDiv);
+  setupStageKeyboard("check2-btn", "carry-input", "sum2-units");
+
+
+
   hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
   document.getElementById("sum2-units").focus();
   autoTab("sum2-units", "carry-input");
@@ -180,8 +258,7 @@ function createSecondStage(data) {
     if (!checkBtn.disabled) checkBtn.focus();
   }
 
-  unitsInput.addEventListener("input", toggleCheckButton);
-  carryInput.addEventListener("input", toggleCheckButton);
+
 
   checkBtn.addEventListener("click", () => {
     const userUnits = parseInt(toEnglishDigits(unitsInput.value));
@@ -238,7 +315,7 @@ function createThirdStage(data, carry) {
     <div style="display: inline-block; text-align: center;">
     <div style="display: inline-block; text-align: center; margin-top: 10px;">
   <label for="sum3-tens" style="font-size: 14px;">دهگان</label><br>
-  <input type="text" maxlength="2" class="answer tens-input" id="sum3-tens">
+  <input type="text" maxlength="2" class="answer tens-input" id="sum3-tens" readonly>
   </div>
     </div>
 
@@ -250,6 +327,9 @@ function createThirdStage(data, carry) {
   `;
 
   hintSection.appendChild(stageDiv);
+  setupStageKeyboard("check3-btn", null, "sum3-tens");
+
+
   hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
   document.getElementById("sum3-tens").focus();
   autoTab("sum3-tens", "check3-btn");
@@ -311,11 +391,11 @@ function createFinalStage(data) {
 <div style="display: inline-block; text-align: center;">
     <div style="display: inline-block; text-align: center; margin-top: 10px;">
     <label for="final-tens" style="font-size: 14px;">دهگان</label><br>
-    <input type="text" maxlength="1" class="answer tens-input" id="final-tens">
+    <input type="text" maxlength="1" class="answer tens-input" id="final-tens" readonly>
   </div>
 <div style="display: inline-block; text-align: center; margin-top: 10px;">
     <label for="final-tens" style="font-size: 14px;">یکان</label><br>
-    <input type="text" maxlength="1" class="answer units-input" id="final-units">
+    <input type="text" maxlength="1" class="answer units-input" id="final-units" readonly>
   </div>
 
 </div>
@@ -329,11 +409,15 @@ function createFinalStage(data) {
   `;
 
   hintSection.appendChild(stageDiv);
+
+    setupStageKeyboard("final-check-btn", "final-tens", "final-units");
+
+
   hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  document.getElementById("final-units").focus();
-  autoTab("final-units", "final-tens");
-  enforcePersianInput("final-tens");
-  enforcePersianInput("final-units");
+  // document.getElementById("final-units").focus();
+  // autoTab("final-units", "final-tens");
+  // enforcePersianInput("final-tens");
+  // enforcePersianInput("final-units");
 
   const tensInput = document.getElementById("final-tens");
   const unitsInput = document.getElementById("final-units");
@@ -344,8 +428,8 @@ function createFinalStage(data) {
     if (!checkBtn.disabled) checkBtn.focus();
   }
 
-  tensInput.addEventListener("input", toggleFinalCheck);
-  unitsInput.addEventListener("input", toggleFinalCheck);
+  // tensInput.addEventListener("input", toggleFinalCheck);
+  // unitsInput.addEventListener("input", toggleFinalCheck);
 
   checkBtn.addEventListener("click", () => {
     const userTens = parseInt(toEnglishDigits(tensInput.value));
@@ -390,6 +474,8 @@ function resetStages(data) {
   document.getElementById("sum-units").disabled = false;
   document.getElementById("check-btn").disabled = true;
   document.getElementById("hint-btn").disabled = false;
+  document.getElementById("custom-keyboard")?.remove();
+  createKeyboard();
 
   const newCheckBtn = document.getElementById("check-btn").cloneNode(true);
   document.getElementById("check-btn").replaceWith(newCheckBtn);
@@ -402,11 +488,11 @@ function resetStages(data) {
 
   function toggleButton() {
     newCheckBtn.disabled = !(tensInput.value && unitsInput.value);
-    if (!checkBtn.disabled) checkBtn.focus();
+    if (!newCheckBtn.disabled) newCheckBtn.focus();
   }
 
-  tensInput.addEventListener("input", toggleButton);
-  unitsInput.addEventListener("input", toggleButton);
+  // tensInput.addEventListener("input", toggleButton);
+  // unitsInput.addEventListener("input", toggleButton);
 
   newCheckBtn.addEventListener("click", () => {
     checkAnswer(data.tens, data.units, data);
@@ -422,6 +508,8 @@ function resetStages(data) {
 }
 
 function checkAnswer(correctTens, correctUnits, data) {
+  console.log("Expected:", correctTens, correctUnits);
+
   const tensInput = document.getElementById("sum-tens").value;
   const unitsInput = document.getElementById("sum-units").value;
   const feedback = document.getElementById("feedback");
