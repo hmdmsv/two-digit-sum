@@ -13,13 +13,14 @@ body {
   font-size: 15px; /* کاهش پایه فونت */
 }
 
+
 .container {
-  height: 80vh;
+  height: 80%;
   overflow-y: auto;
   margin: 0 auto;
   padding: 18px;
-  width: 90%;
-  max-width: 500px;
+  width: 95%;
+  /* max-width: 500px; */
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
