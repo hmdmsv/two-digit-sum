@@ -208,6 +208,9 @@ function disableFirstStage() {
   document.getElementById("sum-units").disabled = true;
   document.getElementById("check-btn").disabled = true;
   document.getElementById("hint-btn").disabled = true;
+
+  document.getElementById("check-btn")?.remove();
+  document.getElementById("hint-btn")?.remove();
 }
 
 function createSecondStage(data) {
@@ -293,6 +296,8 @@ function createSecondStage(data) {
     checkBtn.disabled = false;
     document.getElementById("hint2-btn").disabled = true;
     document.getElementById("check2-btn").disabled = true;
+    document.getElementById("check2-btn")?.remove();
+    document.getElementById("hint2-btn")?.remove();
     unitsInput.disabled = true;
     carryInput.disabled = true
     
@@ -370,6 +375,8 @@ function createThirdStage(data, carry) {
     checkBtn.disabled = false;
     document.getElementById("hint3-btn").disabled = true;
     document.getElementById("check3-btn").disabled = true;
+    document.getElementById("check3-btn")?.remove();
+    document.getElementById("hint3-btn")?.remove();
     tensInput.disabled = true;
 
     createFinalStage(data);
@@ -453,6 +460,7 @@ function createFinalStage(data) {
       feedback.textContent = "👏 آفرین! جواب نهایی کاملاً درست است!";
       feedback.style.color = "green";
       checkBtn.disabled = true;
+      document.getElementById("final-check-btn")?.remove();
       checkBtn.classList.add("disabled"); // اختیاری برای تغییر ظاهر
 
       actions.innerHTML = `
