@@ -2,6 +2,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  min-width: 480px;
   overflow: auto;
   touch-action: manipulation;
 }
@@ -178,12 +179,13 @@ body {
   max-width: 500px; /* هم‌عرض با .container */
   width: 95%;
   margin: 0 auto;
+  overflow-x: auto;
 }
 
 .key-btn {
   font-family: 'Vazir', 'Shabnam', sans-serif;
   flex: 1;
-  min-width: 40px;
+  min-width: 35px;
   max-width: 50px;
   font-size: 24px;
   padding: 10px 14px;
