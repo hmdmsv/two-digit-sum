@@ -159,6 +159,7 @@ body {
 
 .keyboard-bar { 
   position: fixed;
+  margin: 20px 0;
   bottom: 0;
   left: 0;
   right: 0;
