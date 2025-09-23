@@ -292,6 +292,8 @@ function createSecondStage(data) {
     checkBtn.disabled = false;
     document.getElementById("hint2-btn").disabled = true;
     document.getElementById("check2-btn").disabled = true;
+    unitsInput.disabled = true;
+    carryInput.disabled = true
     
 
     createThirdStage(data, correctCarry);
@@ -335,7 +337,7 @@ function createThirdStage(data, carry) {
   setupStageKeyboard("check3-btn", null, "sum3-tens");
 
 
-  hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  hintSection.scrollIntoView({ behavior: "smooth", block: "end" });
   document.getElementById("sum3-tens").focus();
   autoTab("sum3-tens", "check3-btn");
   enforcePersianInput("sum3-tens");
@@ -414,11 +416,12 @@ function createFinalStage(data) {
   `;
 
   hintSection.appendChild(stageDiv);
+  
 
     setupStageKeyboard("final-check-btn", "final-tens", "final-units");
 
 
-  hintSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  hintSection.scrollIntoView({ behavior: "smooth", block: "end" });
   // document.getElementById("final-units").focus();
   // autoTab("final-units", "final-tens");
   // enforcePersianInput("final-tens");
@@ -448,11 +451,22 @@ function createFinalStage(data) {
     if (userTens === correctTens && userUnits === correctUnits) {
       feedback.textContent = "👏 آفرین! جواب نهایی کاملاً درست است!";
       feedback.style.color = "green";
+      checkBtn.disabled = true;
+      checkBtn.classList.add("disabled"); // اختیاری برای تغییر ظاهر
 
       actions.innerHTML = `
         <button class="final-actions" id="repeat-btn">🔁 تکرار</button>
         <button class="final-actions" id="next-btn">➡️ بعدی</button>
       `;
+
+      
+
+const nextBtn = document.getElementById("next-btn");
+nextBtn.focus();
+
+setTimeout(() => {
+  nextBtn.scrollIntoView({ behavior: "smooth", block: "end" });
+}, 50);
 
       document.getElementById("repeat-btn").addEventListener("click", () => {
         resetStages(data);
@@ -482,7 +496,7 @@ function resetStages(data) {
   document.getElementById("custom-keyboard")?.remove();
   createKeyboard();
 
-  const newCheckBtn = document.getElementById("check-btn").cloneNode(true);
+  const newCheckBtn = document.getElementById("final-check-btn").cloneNode(true);
   document.getElementById("check-btn").replaceWith(newCheckBtn);
 
   const newHintBtn = document.getElementById("hint-btn").cloneNode(true);
@@ -520,9 +534,11 @@ function checkAnswer(correctTens, correctUnits, data) {
   const feedback = document.getElementById("feedback");
 
   if (parseInt(toEnglishDigits(tensInput)) === correctTens && parseInt(toEnglishDigits(unitsInput)) === correctUnits) {
+    const checkBtn = document.getElementById("check-btn");
     feedback.textContent = "آفرین! جواب درست است 🎉";
     feedback.style.color = "green";
     disableFirstStage();
+    checkBtn.disabled = true;
     showFinalActions(data); // فقط دکمه‌ها رو نمایش بده
   } else {
     feedback.textContent = "اشتباهه! دوباره تلاش کن 😅";
@@ -542,6 +558,13 @@ function showFinalActions(data) {
   `;
 
   hintSection.appendChild(actionsDiv);
+
+    const nextBtn = actionsDiv.querySelector("#next-btn");
+    setTimeout(() => {
+  nextBtn .scrollIntoView({ behavior: "smooth", block: "end" });
+}, 0);
+
+
 
   document.getElementById("repeat-btn").addEventListener("click", () => {
     resetStages(data);
