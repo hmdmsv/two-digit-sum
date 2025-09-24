@@ -232,10 +232,10 @@ body {
   display: inline-block;
 }
 .equals{
-  margin: 0 42px;
+  margin: 0 38px;
 }
 .carry-in{
-  margin: 0 10px;
+  margin: 0 3px;
 }
 
 .answer-block {
@@ -277,7 +277,7 @@ body {
   padding: 5px 8px;
   background-color: #fff;
   font-weight: bold;
-  margin: 5px;
+  margin: 1px;
 }
 
 .digit {
