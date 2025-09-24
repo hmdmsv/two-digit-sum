@@ -188,11 +188,14 @@ body {
 
 .key-container {
   display: flex;
+  text-align: center;
   justify-content: space-between;
   gap: 8px;
   max-width: 500px; /* هم‌عرض با .container */
   width: 90%;
-  /* border: 1px solid #333; */
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px solid #333;
   margin: 0 auto;
   overflow-x: auto;
 }
