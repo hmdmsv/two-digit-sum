@@ -48,6 +48,13 @@ function generateNumbers() {
 
 }
 
+function removeStageElements(...ids) {
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  });
+}
+
 function autoTab(currentInputId, nextInputId, maxLength = 1) {
   const current = document.getElementById(currentInputId);
   const next = document.getElementById(nextInputId);
@@ -64,21 +71,45 @@ function autoTab(currentInputId, nextInputId, maxLength = 1) {
 let activeField = null;
 let checkBtnId = null;
 
+// function handleDigitClick(val) {
+//   const input = document.getElementById(activeField);
+//   if (!input) return;
+
+//   input.value = toPersianDigits(val);
+
+//   const checkBtn = document.getElementById(checkBtnId);
+//   const parent = input.closest(".problem");
+
+//   // فقط ورودی‌هایی که readonly هستن (یعنی با کیبورد عددی پر می‌شن)
+//   const stageInputs = parent.querySelectorAll("input[readonly]");
+//   const allFilled = Array.from(stageInputs).every(inp => toEnglishDigits(inp.value).length > 0);
+
+//   checkBtn.disabled = !allFilled;
+// }
+
 function handleDigitClick(val) {
   const input = document.getElementById(activeField);
   if (!input) return;
 
   input.value = toPersianDigits(val);
 
-  const checkBtn = document.getElementById(checkBtnId);
   const parent = input.closest(".problem");
+  const stageInputs = Array.from(parent.querySelectorAll("input.answer[readonly]"));
 
-  // فقط ورودی‌هایی که readonly هستن (یعنی با کیبورد عددی پر می‌شن)
-  const stageInputs = parent.querySelectorAll("input[readonly]");
-  const allFilled = Array.from(stageInputs).every(inp => toEnglishDigits(inp.value).length > 0);
+  const currentIndex = stageInputs.findIndex(inp => inp.id === activeField);
+  const nextIndex = (currentIndex + 1) % stageInputs.length;
+  const nextInput = stageInputs[nextIndex];
 
+  if (nextInput && !nextInput.disabled) {
+    setActiveField(nextInput.id);
+    nextInput.focus();
+  }
+
+  const checkBtn = document.getElementById(checkBtnId);
+  const allFilled = stageInputs.every(inp => toEnglishDigits(inp.value).length > 0);
   checkBtn.disabled = !allFilled;
 }
+
 
 function setActiveField(fieldId) {
   activeField = fieldId;
@@ -145,7 +176,7 @@ function createFirstStage(data) {
     <span class="digit tens" id="num2-tens">${toPersianDigits(data.num2Tens)}</span>
     <span class="digit units" id="num2-units">${toPersianDigits(data.num2Units)}</span>
     </div>
-    <span>=</span>
+    <span class="equals">=</span>
     
     <input type="text" maxlength="1" class="answer tens-input" id="sum-tens" readonly>
     <input type="text" maxlength="1" class="answer units-input" id="sum-units" readonly>
@@ -158,7 +189,7 @@ function createFirstStage(data) {
     <div id="hint-section"></div>
   `;
   let selectedTens = null;
-let selectedUnits = null;
+  let selectedUnits = null;
 
 
 
@@ -167,7 +198,12 @@ let selectedUnits = null;
 
 setupStageKeyboard("check-btn", "sum-tens", "sum-units");
 
-  container.scrollIntoView({ behavior: "smooth", block: "end" });
+setActiveField("sum-tens"); // اعمال کلاس .active
+document.getElementById("sum-tens")?.focus(); // فوکوس واقعی
+
+
+
+container.scrollIntoView({ behavior: "smooth", block: "end" });
 
 
 document.getElementById("sum-tens").addEventListener("click", () => setActiveField("sum-tens"));
@@ -177,13 +213,6 @@ document.getElementById("sum-units").addEventListener("click", () => setActiveFi
   const tensInput = document.getElementById("sum-tens");
   const unitsInput = document.getElementById("sum-units");
   const checkBtn = document.getElementById("check-btn");
-
-  function toggleButton() {
-    checkBtn.disabled = !(tensInput.value && unitsInput.value);
-    if (!checkBtn.disabled) checkBtn.focus();
-  }
-
- 
 
   checkBtn.addEventListener("click", () => {
     const tens = parseInt(toEnglishDigits(document.getElementById("sum-tens").value));
@@ -209,8 +238,7 @@ function disableFirstStage() {
   document.getElementById("check-btn").disabled = true;
   document.getElementById("hint-btn").disabled = true;
 
-  document.getElementById("check-btn")?.remove();
-  document.getElementById("hint-btn")?.remove();
+  removeStageElements("check-btn", "hint-btn", "feedback")
 }
 
 function createSecondStage(data) {
@@ -222,22 +250,26 @@ function createSecondStage(data) {
 
   stageDiv.innerHTML = `
   <div class="number-block">
+  <span class="digit tens empty-tens"></span>
+
     <span class="digit units">${toPersianDigits(data.num1Units)}</span>
     </div>
     <span>+</span>
     <div class="number-block">
+    <span class="digit tens empty-tens"></span>
+
     <span class="digit units">${toPersianDigits(data.num2Units)}</span>
     </div>
-    <span>=</span>
+    <span class="equals">=</span>
 
 <div style="display: inline-block; text-align: center;">
     <div style="display: inline-block; text-align: center; margin-top: 10px;">
     <label for="carry-input" style="font-size: 14px;">انتقال</label><br>
-    <input type="text" maxlength="1" class="carry-box" id="carry-input" readonly>
+    <input type="text" maxlength="1" class="carry-box answer" id="carry-input" readonly>
   </div>
   <div style="display: inline-block; text-align: center; margin-top: 10px;">
     <label for="sum2-units" style="font-size: 16px;">یکان</label><br>
-    <input type="text" maxlength="1" class="answer units-input" id="sum2-units" readonly>
+    <input type="text" maxlength="1" class="units-input answer" id="sum2-units" readonly>
   </div>
 </div>
 
@@ -251,6 +283,9 @@ function createSecondStage(data) {
 
   hintSection.appendChild(stageDiv);
   setupStageKeyboard("check2-btn", "carry-input", "sum2-units");
+
+  setActiveField("carry-input"); // اعمال کلاس .active
+  document.getElementById("carry-input")?.focus(); // فوکوس واقعی 
 
   hintSection.scrollIntoView({ behavior: "smooth", block: "end" });
   document.getElementById("sum2-units").focus();
@@ -296,8 +331,8 @@ function createSecondStage(data) {
     checkBtn.disabled = false;
     document.getElementById("hint2-btn").disabled = true;
     document.getElementById("check2-btn").disabled = true;
-    document.getElementById("check2-btn")?.remove();
-    document.getElementById("hint2-btn")?.remove();
+    removeStageElements("check2-btn", "hint2-btn", "feedback2")
+
     unitsInput.disabled = true;
     carryInput.disabled = true
     
@@ -317,13 +352,15 @@ function createThirdStage(data, carry) {
   stageDiv.innerHTML = `
    <div class="number-block">
     <span class="digit tens">${toPersianDigits(data.num1Tens)}</span>
+    <span class="digit units empty-units"></span>
     </div>
     <span>+</span>
     <div class="number-block">
     <span class="digit tens">${toPersianDigits(data.num2Tens)}</span>
+    <span class="digit units empty-units"></span>
     </div>
     <span>+</span>
-    <span class="carry-box">${toPersianDigits(carry)}</span>
+    <input type="text" class="answer carry-box carry-in" value="${toPersianDigits(carry)}" readonly disabled>
     <span>=</span>
     <div style="display: inline-block; text-align: center;">
     <div style="display: inline-block; text-align: center; margin-top: 10px;">
@@ -341,6 +378,9 @@ function createThirdStage(data, carry) {
 
   hintSection.appendChild(stageDiv);
   setupStageKeyboard("check3-btn", null, "sum3-tens");
+
+  setActiveField(activeField); // اعمال کلاس .active
+  document.getElementById(activeField)?.focus(); // فوکوس واقعی
 
 
   hintSection.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -375,8 +415,8 @@ function createThirdStage(data, carry) {
     checkBtn.disabled = false;
     document.getElementById("hint3-btn").disabled = true;
     document.getElementById("check3-btn").disabled = true;
-    document.getElementById("check3-btn")?.remove();
-    document.getElementById("hint3-btn")?.remove();
+      removeStageElements("check3-btn", "hint3-btn", "feedback3")
+
     tensInput.disabled = true;
 
     createFinalStage(data);
@@ -400,7 +440,7 @@ function createFinalStage(data) {
     <span class="digit tens">${toPersianDigits(data.num2Tens)}</span>
     <span class="digit units">${toPersianDigits(data.num2Units)}</span>
     </div>
-    <span>=</span>
+    <span class="equals">=</span>
 
 <!-- خط اصلی محاسبه: فقط کادرهای ورودی با label بالا -->
 <div style="display: inline-block; text-align: center;">
@@ -427,6 +467,9 @@ function createFinalStage(data) {
   
 
     setupStageKeyboard("final-check-btn", "final-tens", "final-units");
+
+    setActiveField("final-tens"); // اعمال کلاس .active
+    document.getElementById("final-tens")?.focus(); // فوکوس واقعی
 
 
   hintSection.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -460,12 +503,14 @@ function createFinalStage(data) {
       feedback.textContent = "👏 آفرین! جواب نهایی کاملاً درست است!";
       feedback.style.color = "green";
       checkBtn.disabled = true;
-      document.getElementById("final-check-btn")?.remove();
+      removeStageElements("final-check-btn",)
       checkBtn.classList.add("disabled"); // اختیاری برای تغییر ظاهر
 
       actions.innerHTML = `
+      <div class="test">
         <button class="final-actions" id="repeat-btn">🔁 تکرار</button>
         <button class="final-actions" id="next-btn">➡️ بعدی</button>
+        </div>
       `;
 
       
