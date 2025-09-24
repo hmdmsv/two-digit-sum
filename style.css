@@ -21,7 +21,7 @@ body {
   margin: 0 auto;
   padding: 0px;
   padding-left: 0px;
-  width: 90%;
+  width: 85%;
   max-width: 480px;
   background-color: #fff;
   border-radius: 12px;
@@ -242,7 +242,7 @@ body {
   display: inline-block;
 }
 .equals{
-  margin: 0 38px;
+  margin: 0 37px;
 }
 .carry-in{
   margin: 0 3px;
