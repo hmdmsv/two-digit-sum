@@ -32,8 +32,8 @@ function enforcePersianInput(inputId) {
 function generateNumbers() {
   let num1, num2;
   do {
-    num1 = Math.floor(Math.random() * 90) + 10;
-    num2 = Math.floor(Math.random() * 90) + 10;
+    num1 = Math.floor(Math.random() * 90) ;
+    num2 = Math.floor(Math.random() * 90) ;
   } while (num1 + num2 >= 100);
 
   return {
