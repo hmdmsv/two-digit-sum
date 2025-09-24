@@ -121,6 +121,30 @@ function setActiveField(fieldId) {
   if (target) target.classList.add("active");
 }
 
+// function createKeyboard() {
+//   const oldKeyboard = document.getElementById("custom-keyboard");
+//   if (oldKeyboard) oldKeyboard.remove();
+
+//   const keyboard = document.createElement("div");
+//   keyboard.id = "custom-keyboard";
+//   keyboard.className = "keyboard-bar";
+
+//   // ظرف داخلی برای دکمه‌ها
+//   const keyContainer = document.createElement("div");
+//   keyContainer.className = "key-container";
+
+//   for (let i = 0; i <= 9; i++) {
+//     const btn = document.createElement("button");
+//     btn.className = "key-btn";
+//     btn.textContent = toPersianDigits(i);
+//     btn.addEventListener("click", () => handleDigitClick(i));
+//     keyContainer.appendChild(btn);
+//   }
+
+//   keyboard.appendChild(keyContainer);
+//   document.body.appendChild(keyboard);
+// }
+
 function createKeyboard() {
   const oldKeyboard = document.getElementById("custom-keyboard");
   if (oldKeyboard) oldKeyboard.remove();
@@ -129,18 +153,33 @@ function createKeyboard() {
   keyboard.id = "custom-keyboard";
   keyboard.className = "keyboard-bar";
 
-  // ظرف داخلی برای دکمه‌ها
   const keyContainer = document.createElement("div");
   keyContainer.className = "key-container";
 
-  for (let i = 0; i <= 9; i++) {
+  // ردیف اول:0 تا 4
+  const row1 = document.createElement("div");
+  row1.className = "key-row";
+  for (let i = 0; i <= 4; i++) {
     const btn = document.createElement("button");
     btn.className = "key-btn";
     btn.textContent = toPersianDigits(i);
     btn.addEventListener("click", () => handleDigitClick(i));
-    keyContainer.appendChild(btn);
+    row1.appendChild(btn);
   }
 
+  // ردیف دوم: 5 تا 9 
+  const row2 = document.createElement("div");
+  row2.className = "key-row";
+  for (let i of [5, 6, 7, 8, 9]) {
+    const btn = document.createElement("button");
+    btn.className = "key-btn";
+    btn.textContent = toPersianDigits(i);
+    btn.addEventListener("click", () => handleDigitClick(i));
+    row2.appendChild(btn);
+  }
+
+  keyContainer.appendChild(row1);
+  keyContainer.appendChild(row2);
   keyboard.appendChild(keyContainer);
   document.body.appendChild(keyboard);
 }

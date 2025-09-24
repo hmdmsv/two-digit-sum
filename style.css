@@ -16,7 +16,7 @@ body {
 
 
 .container {
-  height: 80%;
+  height: 70%;
   overflow-y: auto;
   margin: 0 auto;
   padding: 0px;
@@ -188,25 +188,32 @@ body {
 
 .key-container {
   display: flex;
+ flex-direction: column;
   text-align: center;
   justify-content: space-between;
-  gap: 8px;
-  max-width: 500px; /* هم‌عرض با .container */
+  gap: 10px;
+  max-width: 480px; /* هم‌عرض با .container */
   width: 90%;
-  padding-left: 10px;
-  padding-right: 10px;
-  border: 1px solid #888;
+  /* border: 1px solid #888; */
   margin: 0 auto;
   overflow-x: auto;
 }
+.key-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
 
 .key-btn {
   font-family: 'Vazir', 'Shabnam', sans-serif;
   flex: 1;
-  min-width: 1.8rem;
+  text-align: center;
+  height: 3.5rem;
+  min-width: 1.5rem;
   max-width: 3rem;
-  font-size: 1.3rem;
-  padding: 10px;
+  font-size: 1.5rem;
+  padding: 5px;
   background-color: #e0e0e0;
   border: none;
   border-radius: 6px;
@@ -214,7 +221,6 @@ body {
   transition: 0.2s;
   text-align: center;
 }
-
 
 .key-btn:active {
   background-color: #c0e7ff;
