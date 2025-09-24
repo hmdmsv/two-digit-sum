@@ -21,7 +21,7 @@ body {
   margin: 0 auto;
   padding: 0px;
   padding-left: 0px;
-  width: 90%;
+  width: 85%;
   max-width: 480px;
   background-color: #fff;
   border-radius: 12px;
@@ -190,8 +190,8 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  max-width: 500px; /* هم‌عرض با .container */
-  width: 95%;
+  max-width: 480px; /* هم‌عرض با .container */
+  width: 85%;
   margin: 0 auto;
   overflow-x: auto;
 }
