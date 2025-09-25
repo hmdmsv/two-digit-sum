@@ -1,5 +1,6 @@
 html, body {
   height: 100%;
+  width: 98%;
   margin: 0;
   padding: 0;
   min-width: 460px;
@@ -21,13 +22,61 @@ body {
   margin: 0 auto;
   padding: 0px;
   padding-left: 0px;
-  width: 85%;
+  width: 8%;
   max-width: 480px;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
   box-sizing: border-box;
   scroll-behavior: smooth;
+}
+
+.hamburger-menu {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+#hamburger-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.settings-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fefefe;
+  border-bottom: 2px solid #ccc;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 999;
+  transition: transform 0.3s ease;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+.settings-panel.hidden {
+  transform: translateY(-100%);
+}
+
+.settings-panel fieldset {
+  margin-bottom: 12px;
+  border: none;
+}
+
+.settings-panel legend {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.settings-panel label {
+  display: inline-block;
+  margin-right: 15px;
+  font-size: 14px;
 }
 
 .problem {

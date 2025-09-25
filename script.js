@@ -3,8 +3,6 @@ function toPersianDigits(str) {
   return str.toString().replace(/\d/g, d => persianDigits[d]);
 }
 
-
-
 function toEnglishDigits(str) {
   const englishDigits = ['0','1','2','3','4','5','6','7','8','9'];
   return str.replace(/[۰-۹]/g, d => englishDigits['۰۱۲۳۴۵۶۷۸۹'.indexOf(d)]);
@@ -30,7 +28,12 @@ function enforcePersianInput(inputId) {
 }
 
 function generateNumbers() {
+  
   let num1, num2;
+const operation = document.querySelector('input[name="operation"]:checked').value;
+const digits = parseInt(document.querySelector('input[name="digits"]:checked').value);
+const layout = document.querySelector('input[name="layout"]:checked').value;
+
   do {
     num1 = Math.floor(Math.random() * 90) ;
     num2 = Math.floor(Math.random() * 90) ;
@@ -196,6 +199,12 @@ function setupStageKeyboard(stagePrefix, tensId, unitsId) {
     document.getElementById(tensId).addEventListener("click", () => setActiveField(tensId));
   }
 }
+
+document.getElementById("hamburger-btn").addEventListener("click", () => {
+  const panel = document.getElementById("settings-panel");
+  panel.classList.toggle("hidden");
+});
+
 
 
 function createFirstStage(data) {
