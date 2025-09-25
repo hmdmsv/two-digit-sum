@@ -15,41 +15,38 @@
 
 
 <body>
+    <div class="top-bar">
+        <button id="hamburger-btn">☰</button>
+    </div>
+
     <div class="container">
         <!-- <h2>تمرین جمع دو رقمی</h2> -->
-        <div class="hamburger-menu">
-            <button id="hamburger-btn">☰</button>
-        </div>
-
-        <div id="settings-panel" class="settings-panel hidden">
-            <!-- <h3>تنظیمات</h3> -->
-
-            <!-- عملیات ریاضی -->
-            <fieldset>
-                <legend>نوع عملیات</legend>
-                <label><input type="radio" name="operation" value="add" checked> جمع</label>
-                <label><input type="radio" name="operation" value="subtract"> تفریق</label>
-            </fieldset>
-
-            <!-- تعداد رقم -->
-            <fieldset>
-                <legend>تعداد رقم</legend>
-                <label><input type="radio" name="digits" value="1"> یک رقمی</label>
-                <label><input type="radio" name="digits" value="2" checked> دو رقمی</label>
-            </fieldset>
-
-            <!-- حالت نمایش -->
-            <fieldset>
-                <legend>حالت نمایش</legend>
-                <label><input type="radio" name="layout" value="horizontal" checked> خطی</label>
-                <label><input type="radio" name="layout" value="vertical"> عمودی</label>
-            </fieldset>
-        </div>
-
-
-
 
         <div id="main-container"></div> <!-- محل نمایش مراحل -->
+    </div>
+    <div id="settings-panel" class="settings-panel hidden">
+        <!-- <h3>تنظیمات</h3> -->
+
+        <!-- عملیات ریاضی -->
+        <fieldset>
+            <legend>نوع عملیات</legend>
+            <label><input type="radio" name="operation" value="add" checked> جمع</label>
+            <label><input type="radio" name="operation" value="subtract"> تفریق</label>
+        </fieldset>
+
+        <!-- تعداد رقم -->
+        <fieldset>
+            <legend>تعداد رقم</legend>
+            <label><input type="radio" name="digits" value="1"> یک رقمی</label>
+            <label><input type="radio" name="digits" value="2" checked> دو رقمی</label>
+        </fieldset>
+
+        <!-- حالت نمایش -->
+        <fieldset>
+            <legend>حالت نمایش</legend>
+            <label><input type="radio" name="layout" value="horizontal" checked> خطی</label>
+            <label><input type="radio" name="layout" value="vertical"> عمودی</label>
+        </fieldset>
     </div>
 
     <!-- صفحه‌کلید عددی -->
