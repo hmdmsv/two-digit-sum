@@ -22,7 +22,7 @@ body {
   margin: 0 auto;
   padding: 0px;
   padding-left: 0px;
-  width: 8%;
+  width: 80%;
   max-width: 480px;
   background-color: #fff;
   border-radius: 12px;
@@ -46,7 +46,7 @@ body {
 }
 
 .settings-panel {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
