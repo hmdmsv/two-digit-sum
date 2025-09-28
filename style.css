@@ -360,7 +360,7 @@ body {
   display: inline-block;
 }
 .equals{
-  margin: 0 33px;
+  margin: 0 5px;
 }
 .carry-in{
   margin: 0 3px;
@@ -405,7 +405,7 @@ body {
   padding: 5px 8px;
   background-color: #fff;
   font-weight: bold;
-  margin: 1px;
+  margin: 5px;
 }
 
 .digit {

@@ -398,7 +398,7 @@ function createThirdStage(data, carry) {
   const stageDiv = document.createElement("div");
   stageDiv.className = "problem";
 
-  const sumTens = data.num1Tens + data.num2Tens + carry;
+  const sumTens = data.num1Tens + data.num2Tens;
 
   stageDiv.innerHTML = `
    <div class="number-block">
@@ -410,9 +410,7 @@ function createThirdStage(data, carry) {
     <span class="digit tens">${toPersianDigits(data.num2Tens)}</span>
     <span class="digit units empty-units"></span>
     </div>
-    <span>+</span>
-    <input type="text" class="answer carry-box carry-in" value="${toPersianDigits(carry)}" readonly disabled>
-    <span>=</span>
+    <span class="equals">=</span>
     <div style="display: inline-block; text-align: center;">
     <div style="display: inline-block; text-align: center; margin-top: 10px;">
   <label for="sum3-tens" style="font-size: 14px;">دهگان</label><br>
@@ -688,6 +686,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("refresh-btn").addEventListener("click", () => {
   const data = generateNumbers(); // بر اساس تنظیمات فعلی
   document.getElementById("main-container").innerHTML = "";
-  // document.getElementById("hint-section").innerHTML = "";
+  // 
   createFirstStage(data);
 });
