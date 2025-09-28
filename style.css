@@ -85,14 +85,16 @@ body {
   transform: translateY(-100%);
 }
 
-.settings-panel fieldset {
+.settings-panel fieldset{
+  /* display: flex; */
+  flex-wrap:nowrap;
+  justify-content: space-between;
   margin-bottom: 12px;
   width: 350px;
-  margin-bottom: 25px;
+  margin-top: 25px;
   text-align: right;
   border-radius: 5px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-  border: 2px solid #ddd;
 }
 
 .settings-panel legend {
@@ -103,11 +105,15 @@ body {
 
 
 
-.settings-panel label {
+.settings-panel label{
   display: inline-block;
-
-  margin-right: 15px; 
+  margin-right: 15px;
+  margin-bottom: 15px;
+  gap: 15px;
   font-size: 14px;
+}
+.settings-panel label:not(:first-child) {
+  margin-top: 15px;
 }
 
 .settings-panel input[type="radio"]:disabled + span,
@@ -116,9 +122,14 @@ body {
   cursor: not-allowed;
 }
 
-.checkclass{
-  padding-top: 15px;
-}
+
+/* .checkclass{
+  border: none;
+  padding-top: 20px; */
+  
+  /* gap: 150px; */
+  /* border: 1px solid #eee; */
+/* } */
 
 .problem {
   font-size: 16px;

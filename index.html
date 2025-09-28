@@ -38,23 +38,26 @@
 
         <!-- عملیات ریاضی -->
         <fieldset>
-            <legend>نوع عملیات</legend>
+            <legend>تنظیمات</legend>
             <label><input type="radio" name="operation" value="add" checked> جمع</label>
             <label><input type="radio" name="operation" value="subtract"> تفریق</label>
             <label><input type="radio" name="operation" value="multiply" disabled> ضرب </label>
             <label><input type="radio" name="operation" value="divide" disabled> تقسیم</label>
+            <br>
+            <!-- تعداد رقم -->
+            <!-- <legend>تعداد رقم</legend> -->
+            <label><input type="radio" name="digits" value="1"> یک رقمی</label>
+            <label><input type="radio" name="digits" value="2" checked> دو رقمی</label>
+
             <div class="checkclass">
                 <label><input type="checkbox" name="allowNegative" id="allowNegative"> اعداد منفی</label>
                 <label><input type="checkbox" name="allowDecimal" id="allowDecimal"> اعشاری</label>
+
             </div>
+
         </fieldset>
 
-        <!-- تعداد رقم -->
-        <fieldset>
-            <legend>تعداد رقم</legend>
-            <label><input type="radio" name="digits" value="1"> یک رقمی</label>
-            <label><input type="radio" name="digits" value="2" checked> دو رقمی</label>
-        </fieldset>
+
 
 
     </div>
