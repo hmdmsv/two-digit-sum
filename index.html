@@ -27,11 +27,26 @@
     <div id="settings-panel" class="settings-panel hidden">
         <!-- <h3>تنظیمات</h3> -->
 
+        <!-- حالت نمایش -->
+        <fieldset>
+            <legend>حالت نمایش</legend>
+            <label><input type="radio" name="layout" value="horizontal" checked> خطی</label>
+            <label><input type="radio" name="layout" value="vertical"> عمودی</label>
+            <label><input type="radio" name="layout" value="graph" disabled>
+                نمودار</label>
+        </fieldset>
+
         <!-- عملیات ریاضی -->
         <fieldset>
             <legend>نوع عملیات</legend>
             <label><input type="radio" name="operation" value="add" checked> جمع</label>
             <label><input type="radio" name="operation" value="subtract"> تفریق</label>
+            <label><input type="radio" name="operation" value="multiply" disabled> ضرب </label>
+            <label><input type="radio" name="operation" value="divide" disabled> تقسیم</label>
+            <div class="checkclass">
+                <label><input type="checkbox" name="allowNegative" id="allowNegative"> اعداد منفی</label>
+                <label><input type="checkbox" name="allowDecimal" id="allowDecimal"> اعشاری</label>
+            </div>
         </fieldset>
 
         <!-- تعداد رقم -->
@@ -41,12 +56,7 @@
             <label><input type="radio" name="digits" value="2" checked> دو رقمی</label>
         </fieldset>
 
-        <!-- حالت نمایش -->
-        <fieldset>
-            <legend>حالت نمایش</legend>
-            <label><input type="radio" name="layout" value="horizontal" checked> خطی</label>
-            <label><input type="radio" name="layout" value="vertical"> عمودی</label>
-        </fieldset>
+
     </div>
 
     <!-- صفحه‌کلید عددی -->

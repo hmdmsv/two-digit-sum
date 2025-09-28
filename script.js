@@ -119,9 +119,12 @@ function setActiveField(fieldId) {
 
   const allInputs = document.querySelectorAll(".answer");
   allInputs.forEach(input => input.classList.remove("active"));
+  allInputs.forEach(input => input.classList.add("greyed"));
 
   const target = document.getElementById(fieldId);
-  if (target) target.classList.add("active");
+  if (target){ 
+    target.classList.remove("greyed");
+    target.classList.add("active");}
 }
 
 // function createKeyboard() {
