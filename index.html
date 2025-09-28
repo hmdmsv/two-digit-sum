@@ -16,9 +16,14 @@
     <div class="top-bar">
         <button id="refresh-btn" title="تولید مسئله جدید">🔄</button>
         <button id="hamburger-btn">☰</button>
-
-
     </div>
+    <div id="sub-bar" class="sub-bar hidden">
+        <button class="tab-btn active" data-tab="calculations">محاسبات</button>
+        <button class="tab-btn" data-tab="table">جدول اعداد</button>
+        <button class="tab-btn" data-tab="options" disabled>آپشن‌ها</button>
+    </div>
+
+
 
     <div class="container">
         <!-- <h2>تمرین جمع دو رقمی</h2> -->
@@ -27,37 +32,36 @@
     </div>
     <div id="settings-panel" class="settings-panel hidden">
         <!-- <h3>تنظیمات</h3> -->
+        <div id="tab-content">
+            <!-- حالت نمایش -->
+            <fieldset>
+                <legend>حالت نمایش</legend>
+                <label><input type="radio" name="layout" value="horizontal" checked> خطی</label>
+                <label><input type="radio" name="layout" value="vertical"> عمودی</label>
+                <label><input type="radio" name="layout" value="graph" disabled>
+                    نمودار</label>
+            </fieldset>
 
-        <!-- حالت نمایش -->
-        <fieldset>
-            <legend>حالت نمایش</legend>
-            <label><input type="radio" name="layout" value="horizontal" checked> خطی</label>
-            <label><input type="radio" name="layout" value="vertical"> عمودی</label>
-            <label><input type="radio" name="layout" value="graph" disabled>
-                نمودار</label>
-        </fieldset>
+            <!-- عملیات ریاضی -->
+            <fieldset>
+                <legend>تنظیمات</legend>
+                <label><input type="radio" name="operation" value="add" checked> جمع</label>
+                <label><input type="radio" name="operation" value="subtract"> تفریق</label>
+                <label><input type="radio" name="operation" value="multiply" disabled> ضرب </label>
+                <label><input type="radio" name="operation" value="divide" disabled> تقسیم</label>
+                <br>
+                <!-- تعداد رقم -->
+                <!-- <legend>تعداد رقم</legend> -->
+                <label><input type="radio" name="digits" value="1"> یک رقمی</label>
+                <label><input type="radio" name="digits" value="2" checked> دو رقمی</label>
 
-        <!-- عملیات ریاضی -->
-        <fieldset>
-            <legend>تنظیمات</legend>
-            <label><input type="radio" name="operation" value="add" checked> جمع</label>
-            <label><input type="radio" name="operation" value="subtract"> تفریق</label>
-            <label><input type="radio" name="operation" value="multiply" disabled> ضرب </label>
-            <label><input type="radio" name="operation" value="divide" disabled> تقسیم</label>
-            <br>
-            <!-- تعداد رقم -->
-            <!-- <legend>تعداد رقم</legend> -->
-            <label><input type="radio" name="digits" value="1"> یک رقمی</label>
-            <label><input type="radio" name="digits" value="2" checked> دو رقمی</label>
+                <div class="checkclass">
+                    <label><input type="checkbox" name="allowNegative" id="allowNegative"> اعداد منفی</label>
+                    <label><input type="checkbox" name="allowDecimal" id="allowDecimal"> اعشاری</label>
+                </div>
 
-            <div class="checkclass">
-                <label><input type="checkbox" name="allowNegative" id="allowNegative"> اعداد منفی</label>
-                <label><input type="checkbox" name="allowDecimal" id="allowDecimal"> اعشاری</label>
-
-            </div>
-
-        </fieldset>
-
+            </fieldset>
+        </div>
 
 
 

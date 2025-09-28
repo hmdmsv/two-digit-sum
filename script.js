@@ -1,3 +1,64 @@
+const calculationsHTML = `
+  <fieldset>
+    <legend>حالت نمایش</legend>
+    <label><input type="radio" name="layout" value="horizontal" checked> خطی</label>
+    <label><input type="radio" name="layout" value="vertical"> عمودی</label>
+    <label><input type="radio" name="layout" value="graph" disabled> نمودار</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>تنظیمات</legend>
+    <label><input type="radio" name="operation" value="add" checked> جمع</label>
+    <label><input type="radio" name="operation" value="subtract"> تفریق</label>
+    <label><input type="radio" name="operation" value="multiply" disabled> ضرب</label>
+    <label><input type="radio" name="operation" value="divide" disabled> تقسیم</label>
+    <br>
+    <label><input type="radio" name="digits" value="1"> یک رقمی</label>
+    <label><input type="radio" name="digits" value="2" checked> دو رقمی</label>
+
+    <div class="checkclass">
+      <label><input type="checkbox" name="allowNegative" id="allowNegative"> اعداد منفی</label>
+      <label><input type="checkbox" name="allowDecimal" id="allowDecimal"> اعشاری</label>
+    </div>
+  </fieldset>
+`;
+
+const originalSettingsHTML = document.getElementById("settings-panel").innerHTML;
+
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const tab = btn.dataset.tab;
+    const tabContent = document.getElementById("tab-content");
+
+    if (tab === "calculations") {
+      tabContent.innerHTML = calculationsHTML;
+    } else if (tab === "table") {
+      tabContent.innerHTML = "<p style='padding:10px;'>جدول اعداد به‌زودی اضافه می‌شود</p>";
+    } else if (tab === "options") {
+      tabContent.innerHTML = "<p style='padding:10px;'>بخش آپشن‌ها رزرو شده است</p>";
+    }
+  });
+});
+
+document.getElementById("hamburger-btn").addEventListener("click", () => {
+  const panel = document.getElementById("settings-panel");
+  const subBar = document.getElementById("sub-bar");
+
+  const isVisible = panel.classList.contains("visible");
+
+  if (isVisible) {
+    panel.classList.remove("visible");
+    subBar.classList.remove("visible");
+  } else {
+    panel.classList.add("visible");
+    subBar.classList.add("visible");
+  }
+});
+
+
 function toPersianDigits(str) {
   const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
   return str.toString().replace(/\d/g, d => persianDigits[d]);
@@ -689,3 +750,7 @@ document.getElementById("refresh-btn").addEventListener("click", () => {
   // 
   createFirstStage(data);
 });
+
+
+
+

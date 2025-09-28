@@ -63,27 +63,75 @@ body {
 }
 
 #hamburger-btn {
-  font-size: 24px;
+  font-size: 16px;
   background: none;
   border: none;
   cursor: pointer;
 }
 
+.sub-bar {
+  position: fixed;
+  direction: rtl;
+  font-family: 'Vazirmatn', sans-serif;
+  top: 40px; /* زیر top-bar */
+  left: 0;
+  right: 0;
+  height: 36px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 999;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+.sub-bar.visible {
+  transform: translateY(0);
+}
+
+/* .sub-bar.hidden {
+  transform: translateY(-100%);
+} */
+
+.tab-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+.tab-btn.active {
+  border-bottom: 2px solid #007bff;
+  color: #007bff;
+}
+
+.tab-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+
 .settings-panel {
   position: fixed;
   direction: rtl;
-  top: 10px;
-  right: 0;
-  height: 100%;
+  top: 40px;
+  right: 0px;
+  width: 100%;
+  height: calc(100vh - 76px);
+  /* overflow-y: auto; */
   background: #fefefe;
-  border-bottom: 2px solid #ccc;
-  opacity: 95%;
   padding: 15px;
+  z-index: 998;
+  font-family: 'Vazir', 'Shabnam', sans-serif;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 999;
-   /* transform: translateY(-100%); */
+  transform: translateY(-100%);
   transition: transform 0.3s ease;
-  font-family: 'Vazirmatn', sans-serif;
 }
 .settings-panel.visible {
   transform: translateY(0);
@@ -428,3 +476,18 @@ body {
 span {
   vertical-align: middle;
 }
+
+/* @media (max-width: 480px) {
+  .settings-panel fieldset {
+    width: 100%;
+  }
+
+  .key-row {
+    gap: 15px;
+  }
+
+  .key-btn {
+    font-size: 1.3rem;
+    min-width: 2rem;
+  }
+} */
