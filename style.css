@@ -29,7 +29,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  scroll-behavior:smooth
 }
 
 .top-bar {
@@ -45,6 +45,15 @@ body {
   justify-content: flex-end;
   padding: 0 5px;
   z-index: 1000;
+}
+
+#refresh-btn {
+  font-size: 20px;
+  width: 150px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: auto; /* این باعث می‌شه به سمت چپ بچسبه */
 }
 
 .hamburger-menu {
@@ -123,14 +132,13 @@ body {
   cursor: not-allowed;
 }
 
-
-/* .checkclass{
-  border: none;
-  padding-top: 20px; */
-  
-  /* gap: 150px; */
-  /* border: 1px solid #eee; */
-/* } */
+/* .checkclass {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+} */
+ 
 
 .problem {
   font-size: 16px;

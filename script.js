@@ -29,7 +29,7 @@ function enforcePersianInput(inputId) {
 
 function generateNumbers() {
   
-  let num1, num2;
+let num1, num2;
 const operation = document.querySelector('input[name="operation"]:checked').value;
 const digits = parseInt(document.querySelector('input[name="digits"]:checked').value);
 const layout = document.querySelector('input[name="layout"]:checked').value;
@@ -682,5 +682,12 @@ function showFinalActions(data) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const data = generateNumbers();
+  createFirstStage(data);
+});
+
+document.getElementById("refresh-btn").addEventListener("click", () => {
+  const data = generateNumbers(); // بر اساس تنظیمات فعلی
+  document.getElementById("main-container").innerHTML = "";
+  // document.getElementById("hint-section").innerHTML = "";
   createFirstStage(data);
 });
